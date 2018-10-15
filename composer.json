@@ -1,18 +1,26 @@
 {
-  "name": "alecrabbit/template",
-  "description": "PHP package template",
+  "name": "alecrabbit/php-output-a",
+  "description": "PHP output package",
   "type": "library",
   "repositories": [
     {
       "type": "vcs",
       "url": "/var/packages/helpers"
+    },
+    {
+      "type": "vcs",
+      "url": "/var/packages/php-console-colour"
     }
   ],
   "require": {
     "php": ">=7.2",
     "nesbot/carbon": "^2.3",
     "alecrabbit/php-helpers": "dev-master",
-    "krowinski/bcmath-extended": "^4.1"
+    "alecrabbit/php-console-colour": "dev-master",
+    "krowinski/bcmath-extended": "^4.1",
+    "react/event-loop": "^1.0",
+    "symfony/console": "^4.1",
+    "react/stream": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.4",
