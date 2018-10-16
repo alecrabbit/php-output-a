@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "/var/packages/php-console-colour",
-                "reference": "bfd7b569251b408eb4ae5ed51c570844b20e5573"
+                "reference": "bd1597dbed1630c0b0974bdec9e882745a5d1fa9"
             },
             "require": {
                 "alecrabbit/php-helpers": "dev-master",
@@ -39,7 +39,7 @@
                 "MIT"
             ],
             "description": "PHP package alecrabbit/php-console-colour",
-            "time": "2018-10-15T21:18:29+00:00"
+            "time": "2018-10-15T22:36:10+00:00"
         },
         {
             "name": "alecrabbit/php-helpers",
@@ -1150,16 +1150,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "6.0.8",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "848f78b3309780fef7ec8c4666b7ab4e6b09b22f"
+                "reference": "0685fb6a43aed1b2e09804d1aaf17144c82861f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/848f78b3309780fef7ec8c4666b7ab4e6b09b22f",
-                "reference": "848f78b3309780fef7ec8c4666b7ab4e6b09b22f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0685fb6a43aed1b2e09804d1aaf17144c82861f8",
+                "reference": "0685fb6a43aed1b2e09804d1aaf17144c82861f8",
                 "shasum": ""
             },
             "require": {
@@ -1183,7 +1183,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -1209,7 +1209,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-10-04T03:41:23+00:00"
+            "time": "2018-10-16T05:37:37+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
