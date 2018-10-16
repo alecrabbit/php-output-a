@@ -2,21 +2,11 @@
   "name": "alecrabbit/php-output-a",
   "description": "PHP output package",
   "type": "library",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "/var/packages/helpers"
-    },
-    {
-      "type": "vcs",
-      "url": "/var/packages/php-console-colour"
-    }
-  ],
   "require": {
     "php": ">=7.2",
     "nesbot/carbon": "^2.3",
-    "alecrabbit/php-helpers": "dev-master",
-    "alecrabbit/php-console-colour": "dev-master",
+    "alecrabbit/php-helpers": "^0",
+    "alecrabbit/php-console-colour": "^0",
     "krowinski/bcmath-extended": "^4.1",
     "react/event-loop": "^1.0",
     "symfony/console": "^4.1",

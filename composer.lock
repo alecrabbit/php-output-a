@@ -4,18 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90e7d8fa66dbb29bf24b731d8de14ddc",
+    "content-hash": "81f51c51c1feabfc605d52b4acecbf4c",
     "packages": [
         {
             "name": "alecrabbit/php-console-colour",
-            "version": "dev-master",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
-                "url": "/var/packages/php-console-colour",
-                "reference": "bd1597dbed1630c0b0974bdec9e882745a5d1fa9"
+                "url": "https://github.com/alecrabbit/php-console-colour.git",
+                "reference": "c98a8eebaa1fc1fcaafa67c17a5616c3fd6f4502"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alecrabbit/php-console-colour/zipball/c98a8eebaa1fc1fcaafa67c17a5616c3fd6f4502",
+                "reference": "c98a8eebaa1fc1fcaafa67c17a5616c3fd6f4502",
+                "shasum": ""
             },
             "require": {
-                "alecrabbit/php-helpers": "dev-master",
+                "alecrabbit/php-helpers": "^0",
                 "jakub-onderka/php-console-color": "^0.2.0",
                 "php": ">=7.2"
             },
@@ -30,24 +36,26 @@
                     "AlecRabbit\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "PHP package alecrabbit/php-console-colour",
-            "time": "2018-10-15T22:36:10+00:00"
+            "time": "2018-10-16T10:01:51+00:00"
         },
         {
             "name": "alecrabbit/php-helpers",
-            "version": "dev-master",
+            "version": "0.0.4.1",
             "source": {
                 "type": "git",
-                "url": "/var/packages/helpers",
-                "reference": "edcac26f57c73495845a7f824defc3c9ee642c01"
+                "url": "https://github.com/alecrabbit/php-helpers.git",
+                "reference": "5ab5f37de91720fefa83f9140ef7c434dc980f0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alecrabbit/php-helpers/zipball/5ab5f37de91720fefa83f9140ef7c434dc980f0f",
+                "reference": "5ab5f37de91720fefa83f9140ef7c434dc980f0f",
+                "shasum": ""
             },
             "require": {
                 "krowinski/bcmath-extended": "^4.1",
@@ -69,16 +77,12 @@
                     "src/string/string.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "PHP helpers functions",
-            "time": "2018-10-13T23:42:15+00:00"
+            "time": "2018-10-16T09:10:46+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -2317,10 +2321,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "alecrabbit/php-helpers": 20,
-        "alecrabbit/php-console-colour": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
