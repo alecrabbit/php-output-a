@@ -12,13 +12,13 @@ use Symfony\Component\Console\Output\OutputInterface as SymfonyOutputInterface;
 
 interface OutputInterface
 {
-    const VERBOSITY_QUIET = SymfonyOutputInterface::VERBOSITY_QUIET;
-    const VERBOSITY_NORMAL = SymfonyOutputInterface::VERBOSITY_NORMAL;
-    const VERBOSITY_VERBOSE = SymfonyOutputInterface::VERBOSITY_VERBOSE;
-    const VERBOSITY_VERY_VERBOSE = SymfonyOutputInterface::VERBOSITY_VERY_VERBOSE;
-    const VERBOSITY_DEBUG = SymfonyOutputInterface::VERBOSITY_DEBUG;
+    public const VERBOSITY_QUIET = SymfonyOutputInterface::VERBOSITY_QUIET;
+    public const VERBOSITY_NORMAL = SymfonyOutputInterface::VERBOSITY_NORMAL;
+    public const VERBOSITY_VERBOSE = SymfonyOutputInterface::VERBOSITY_VERBOSE;
+    public const VERBOSITY_VERY_VERBOSE = SymfonyOutputInterface::VERBOSITY_VERY_VERBOSE;
+    public const VERBOSITY_DEBUG = SymfonyOutputInterface::VERBOSITY_DEBUG;
 
-    const VERBOSITY_STRINGS =
+    public const VERBOSITY_STRINGS =
         [
             self::VERBOSITY_QUIET => 'QUIET',
             self::VERBOSITY_NORMAL => 'NORMAL',
@@ -27,20 +27,20 @@ interface OutputInterface
             self::VERBOSITY_DEBUG => 'DEBUG',
         ];
 
-    const DEBUG = 'debug';
-    const DARK = 'dark';
-    const MESSAGE = 'message';
-    const LINE = 'line';
-    const INFO = 'info';
-    const COMMENT = 'comment';
-    const NOTICE = 'notice';
-    const WARNING = 'warning';
-    const ERROR = 'error';
-    const ALERT = 'alert';
-    const EMERGENCY = 'emergency';
-    const ATTENTION = 'attention';
+    public const DEBUG = 'debug';
+    public const DARK = 'dark';
+    public const MESSAGE = 'message';
+    public const LINE = 'line';
+    public const INFO = 'info';
+    public const COMMENT = 'comment';
+    public const NOTICE = 'notice';
+    public const WARNING = 'warning';
+    public const ERROR = 'error';
+    public const ALERT = 'alert';
+    public const EMERGENCY = 'emergency';
+    public const ATTENTION = 'attention';
     
-    const TIME_FORMAT = '[Y-m-d H:i:s]';
-    const DEBUG_TIME_FORMAT = '[Y-m-d H:i:s.u]';
+    public const TIME_FORMAT = '[Y-m-d H:i:s]';
+    public const DEBUG_TIME_FORMAT = '[Y-m-d H:i:s.u]';
     
 }

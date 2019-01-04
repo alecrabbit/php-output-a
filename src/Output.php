@@ -21,15 +21,12 @@ class Output implements OutputInterface
 
     /** @var int */
     protected $verbosity;
-
-    /**@var OutputFormatterInterface */
-    private $formatter;
-
-    /**@var ConsoleColour */
-    private $color;
-
     /** @var string */
     protected $timeFormat;
+    /**@var OutputFormatterInterface */
+    private $formatter;
+    /**@var ConsoleColour */
+    private $color;
 
     public function __construct(?LoopInterface $loop = null,
                                 ?int $verbosity = null,
@@ -42,8 +39,9 @@ class Output implements OutputInterface
         $this->formatter->setDecorated($this->color->isSupported());
         $this->timeFormat = OutputInterface::TIME_FORMAT;
 
-        if ($loop)
+        if ($loop) {
             $this->stream = new WritableResourceStream(STDOUT, $loop);
+        }
     }
 
     public function getVerbosity(): int
@@ -56,7 +54,7 @@ class Output implements OutputInterface
         $this->verbosity = $verbosity;
     }
 
-    public function showVerbosity(int $verbosity = OutputInterface::VERBOSITY_VERBOSE, bool $timestamp = true)
+    public function showVerbosity(int $verbosity = OutputInterface::VERBOSITY_VERBOSE, bool $timestamp = true): void
     {
         $this->dark(
             'Verbosity level: ' . OutputInterface::VERBOSITY_STRINGS[$this->verbosity],
@@ -73,7 +71,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function dark($message, $verbosity = null, $timestamp = false)
+    public function dark($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::DARK, $verbosity, $timestamp);
     }
@@ -90,38 +88,39 @@ class Output implements OutputInterface
                          $style = null,
                          $verbosity = null,
                          $timestamp = false,
-                         $newLine = true)
+                         $newLine = true): void
     {
         $verbosity = $verbosity ?? OutputInterface::VERBOSITY_NORMAL;
 
         if ($this->verbosity >= $verbosity) {
-            if (is_integer($message)) {
+            if (\is_int($message)) {
                 $count = bounds($message, 0, 5);
-                for ($i = 0; $i < $count; $i++)
+                for ($i = 0; $i < $count; $i++) {
                     $this->line('', $style, $verbosity, $timestamp);
+                }
                 return;
             }
-            if (is_array($message)) {
+            if (\is_array($message)) {
                 foreach ($message as $item) {
                     $this->line($item, $style, $verbosity, $timestamp);
                 }
                 return;
             }
-            if (empty($message))
+            if (empty($message)) {
                 $message = '  ';
-
-            if ($timestamp) {
-                if (!empty($message) && $message != '  ')
-                    if (is_string($timestamp)) {
-                        $message = ' ' . $timestamp . ' ' . $message;
-                    } elseif ($timestamp instanceof \DateTime) {
-                        $message = ' ' . $timestamp->format($this->timeFormat) . ' ' . $message;
-                    } else {
-                        $message = ' ' . now()->format($this->timeFormat) . ' ' . $message;
-                    }
             }
 
-            if (is_array($style)) {
+            if ($timestamp && !empty($message) && $message !== '  ') {
+                if (\is_string($timestamp)) {
+                    $message = ' ' . $timestamp . ' ' . $message;
+                } elseif ($timestamp instanceof \DateTime) {
+                    $message = ' ' . $timestamp->format($this->timeFormat) . ' ' . $message;
+                } else {
+                    $message = ' ' . now()->format($this->timeFormat) . ' ' . $message;
+                }
+            }
+
+            if (\is_array($style)) {
                 $message = $this->color->apply($style, $message);
             } else {
                 switch ($style) {
@@ -145,13 +144,15 @@ class Output implements OutputInterface
                         $message = tag($message, OutputInterface::INFO);
                         break;
                     case OutputInterface::ERROR:
-                        if ($message == '  ')
+                        if ($message === '  ') {
                             $message = '';
+                        }
                         $message = $this->color->apply(['white', 'bg_red'], $message);
                         break;
                     case OutputInterface::ATTENTION:
-                        if ($message == '  ')
+                        if ($message === '  ') {
                             $message = '';
+                        }
                         $message = $this->color->apply(['light_yellow', 'bg_black', 'bold'], $message);
                         break;
                 }
@@ -162,7 +163,7 @@ class Output implements OutputInterface
         }
     }
 
-    public function raw($data)
+    public function raw($data): void
     {
         if ($this->stream && $this->stream->isWritable()) {
             $this->stream->write($data);
@@ -181,12 +182,12 @@ class Output implements OutputInterface
      */
     public function debug($message,
                           ?int $verbosity = null,
-                          $timestamp = true)
+                          $timestamp = true): void
     {
         $this->line($message, OutputInterface::DEBUG, $verbosity ?? OutputInterface::VERBOSITY_DEBUG, $timestamp);
     }
 
-    public function setStream(WritableResourceStream $stream)
+    public function setStream(WritableResourceStream $stream): void
     {
         $this->stream = $stream;
     }
@@ -199,7 +200,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function message($message, $verbosity = null, $timestamp = false)
+    public function message($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::MESSAGE, $verbosity, $timestamp);
     }
@@ -212,7 +213,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function info($message, $verbosity = null, $timestamp = false)
+    public function info($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::INFO, $verbosity, $timestamp);
     }
@@ -225,7 +226,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function notice($message, $verbosity = null, $timestamp = false)
+    public function notice($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::NOTICE, $verbosity, $timestamp);
     }
@@ -238,7 +239,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function warning($message, $verbosity = null, $timestamp = false)
+    public function warning($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::WARNING, $verbosity, $timestamp);
     }
@@ -250,9 +251,9 @@ class Output implements OutputInterface
      * @param null|int $verbosity
      * @return void
      */
-    public function error(string $string, $verbosity = null)
+    public function error(string $string, $verbosity = null): void
     {
-        $s = str_repeat(' ', strlen($string) + 4);
+        $s = \str_repeat(' ', \strlen($string) + 4);
         $this->line([$s, '  ' . $string . '  ', $s], OutputInterface::ERROR, $verbosity);
     }
 
@@ -263,16 +264,16 @@ class Output implements OutputInterface
      * @param null|int $verbosity
      * @return void
      */
-    public function exception(\Throwable $e, $verbosity = null)
+    public function exception(\Throwable $e, $verbosity = null): void
     {
         $string = '  ' . $e->getMessage() . '  ';
-        $length = strlen($string);
-        $class = '  [' . get_class($e) . ']  ';
-        $eClassLength = strlen($class);
+        $length = \strlen($string);
+        $class = '  [' . \get_class($e) . ']  ';
+        $eClassLength = \strlen($class);
         $length = $length > $eClassLength ? $length : $eClassLength;
 
-        $s = str_repeat(' ', $length);
-        $this->line([1, $s, str_pad($class, $length), str_pad($string, $length), $s, 1], OutputInterface::ERROR, $verbosity);
+        $s = \str_repeat(' ', $length);
+        $this->line([1, $s, \str_pad($class, $length), \str_pad($string, $length), $s, 1], OutputInterface::ERROR, $verbosity);
         $this->dark($e->getTraceAsString(), OutputInterface::VERBOSITY_DEBUG);
     }
 
@@ -283,17 +284,17 @@ class Output implements OutputInterface
      * @param null|int $verbosity
      * @return void
      */
-    public function attention(string $string, $verbosity = null)
+    public function attention(string $string, $verbosity = null): void
     {
         $string = ' ' . $string . '  ';
-        $length = strlen($string);
+        $length = \strlen($string);
         $attention = '  [!!! ATTENTION !!!]  ';
-        $attLength = strlen($attention);
+        $attLength = \strlen($attention);
         $length = $length > $attLength ? $length : $attLength;
 
 
-        $s = str_repeat(' ', $length);
-        $this->line([1, $s, str_pad($attention, $length), str_pad($string, $length), $s, 1], OutputInterface::ATTENTION, $verbosity);
+        $s = \str_repeat(' ', $length);
+        $this->line([1, $s, \str_pad($attention, $length), \str_pad($string, $length), $s, 1], OutputInterface::ATTENTION, $verbosity);
     }
 
     /**
@@ -303,20 +304,21 @@ class Output implements OutputInterface
      * @param null|int $verbosity
      * @return void
      */
-    public function alert($message, $verbosity = null)
+    public function alert($message, $verbosity = null): void
     {
         $length = 0;
         $rpt = 2;
-        if (is_string($message)) {
+        if (\is_string($message)) {
             $message = [$message];
             $rpt = 1;
         }
-        if (is_array($message)) {
+        if (\is_array($message)) {
             foreach ($message as &$item) {
-                $length = max($length, strlen($item) + 12);
+                $length = max($length, \strlen($item) + 12);
                 $item = str_repeat(' ', 6) . $item;
             }
-            $s = str_repeat('*', $length);
+            unset($item);
+            $s = \str_repeat('*', $length);
             $this->comment([1, $s, $message, $s, $rpt], $verbosity);
         }
     }
@@ -329,7 +331,7 @@ class Output implements OutputInterface
      * @param mixed $timestamp
      * @return void
      */
-    public function comment($message, $verbosity = null, $timestamp = false)
+    public function comment($message, $verbosity = null, $timestamp = false): void
     {
         $this->line($message, OutputInterface::COMMENT, $verbosity, $timestamp);
     }
@@ -341,11 +343,11 @@ class Output implements OutputInterface
      * @param null|int $verbosity
      * @return void
      */
-    public function emergency($message, $verbosity = null)
+    public function emergency($message, $verbosity = null): void
     {
         $symbol = '+';
-        $line = ' ' . str_repeat($symbol, strlen($message) + 20) . ' ';
-        $line2 = str_repeat(' ', 9);
+        $line = ' ' . \str_repeat($symbol, \strlen($message) + 20) . ' ';
+        $line2 = \str_repeat(' ', 9);
 
         $this->line($line, OutputInterface::ERROR, $verbosity);
         $this->line(' ' . $symbol . $line2 . $message . $line2 . $symbol . ' ', OutputInterface::ERROR, $verbosity);
@@ -353,7 +355,7 @@ class Output implements OutputInterface
 
     }
 
-    public function quit()
+    public function quit(): void
     {
         $this->stream->end('   ' . PHP_EOL);
     }
@@ -365,7 +367,7 @@ class Output implements OutputInterface
      */
     public function char($char,
                          $style = null,
-                         $verbosity = null)
+                         $verbosity = null): void
     {
         $this->line($char, $style, $verbosity, false, false);
     }
